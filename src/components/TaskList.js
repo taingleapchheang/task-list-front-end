@@ -11,7 +11,8 @@ const TaskList = ({ tasks, setCompleteCallback, deleteTaskCallback }) => {
           key={task.id}
           id={task.id}
           title={task.title}
-          isComplete={task.isComplete}
+          description={task.description}
+          is_complete={task.is_complete}
           setCompleteCallback={setCompleteCallback}
           deleteTaskCallback={deleteTaskCallback}
         />
@@ -26,7 +27,9 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      isComplete: PropTypes.bool.isRequired,
+      description: PropTypes.string.isRequired,
+      // eslint-disable-next-line camelcase
+      is_complete: PropTypes.bool.isRequired,
     })
   ).isRequired,
   setCompleteCallback: PropTypes.func.isRequired,

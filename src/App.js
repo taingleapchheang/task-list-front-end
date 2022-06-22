@@ -1,38 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
+import axios from 'axios';
 
-const TASKS = [
-  {
-    id: 1,
-    title: 'Mow the lawn',
-    isComplete: false,
-  },
-  {
-    id: 2,
-    title: 'Cook Pasta',
-    isComplete: true,
-  },
-];
+// const TASKS = [
+//   {
+//     id: 1,
+//     title: 'Mow the lawn',
+//     isComplete: false,
+//   },
+//   {
+//     id: 2,
+//     title: 'Cook Pasta',
+//     isComplete: true,
+//   },
+// ];
 
 const App = () => {
-  const [tasks, setTasks] = useState(TASKS);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('https://task-list-api-c17.herokuapp.com/tasks')
+      .then((response) => {
+        setTasks(response.data);
+      })
+      .catch((error) => console.log(`Cannot get the data ${error}`));
+  }, []);
 
   const setComplete = (id) => {
-    const newTasks = [];
-    for (const task of tasks) {
-      const newTask = { ...task };
-      if (newTask.id === id) {
-        newTask.isComplete = !newTask.isComplete;
+    const newTasks = [...tasks];
+    let targetTask;
+    for (let task of newTasks) {
+      if (task.id === id) {
+        targetTask = task;
+        if (targetTask.is_complete == false) {
+          axios
+            .patch(
+              `https://task-list-api-c17.herokuapp.com/tasks/${targetTask.id}/mark_complete`
+            )
+            .then(() => {
+              // eslint-disable-next-line camelcase
+              console.log('Patch completed');
+              console.log(targetTask.is_complete);
+              // eslint-disable-next-line camelcase
+              targetTask.is_complete = true;
+            })
+            .catch((error) =>
+              console.log(`Cannot update the complete status ${error}`)
+            );
+        } else if (targetTask.is_complete == true) {
+          axios
+            .patch(
+              `https://task-list-api-c17.herokuapp.com/tasks/${targetTask.id}/mark_incomplete`
+            )
+            .then(() => {
+              // eslint-disable-next-line camelcase
+              console.log('Patch completed');
+              console.log(targetTask.is_complete);
+              // eslint-disable-next-line camelcase
+              targetTask.is_complete = false;
+            })
+            .catch((error) =>
+              console.log(`Cannot update the complete status ${error}`)
+            );
+        }
       }
-      newTasks.push(newTask);
     }
     setTasks(newTasks);
   };
 
   const deleteTask = (id) => {
-    const newTasks = tasks.filter((task) => task.id != id);
-    setTasks(newTasks);
+    axios
+      .delete(`https://task-list-api-c17.herokuapp.com/tasks/${id}`)
+      .then(() => {
+        // eslint-disable-next-line camelcase
+        console.log('deleting task');
+        const newTasks = tasks.filter((task) => task.id != id);
+        setTasks(newTasks);
+      })
+      .catch((error) => console.log(`Cannot delete task ${error}`));
   };
   return (
     <div className="App">
