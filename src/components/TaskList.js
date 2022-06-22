@@ -11,7 +11,7 @@ const TaskList = ({ tasks, setCompleteCallback, deleteTaskCallback }) => {
           key={task.id}
           id={task.id}
           title={task.title}
-          description={task.description}
+          // description={task.description}
           is_complete={task.is_complete}
           setCompleteCallback={setCompleteCallback}
           deleteTaskCallback={deleteTaskCallback}

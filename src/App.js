@@ -30,36 +30,35 @@ const App = () => {
 
   const setComplete = (id) => {
     const newTasks = [...tasks];
-    let targetTask;
+
     for (let task of newTasks) {
       if (task.id === id) {
-        targetTask = task;
-        if (targetTask.is_complete == false) {
+        if (task.is_complete == false) {
           axios
             .patch(
-              `https://task-list-api-c17.herokuapp.com/tasks/${targetTask.id}/mark_complete`
+              `https://task-list-api-c17.herokuapp.com/tasks/${task.id}/mark_complete`
             )
             .then(() => {
               // eslint-disable-next-line camelcase
               console.log('Patch completed');
-              console.log(targetTask.is_complete);
+              console.log(task.is_complete);
               // eslint-disable-next-line camelcase
-              targetTask.is_complete = true;
+              task.is_complete = true;
             })
             .catch((error) =>
               console.log(`Cannot update the complete status ${error}`)
             );
-        } else if (targetTask.is_complete == true) {
+        } else if (task.is_complete == true) {
           axios
             .patch(
-              `https://task-list-api-c17.herokuapp.com/tasks/${targetTask.id}/mark_incomplete`
+              `https://task-list-api-c17.herokuapp.com/tasks/${task.id}/mark_incomplete`
             )
             .then(() => {
               // eslint-disable-next-line camelcase
               console.log('Patch completed');
-              console.log(targetTask.is_complete);
+              console.log(task.is_complete);
               // eslint-disable-next-line camelcase
-              targetTask.is_complete = false;
+              task.is_complete = false;
             })
             .catch((error) =>
               console.log(`Cannot update the complete status ${error}`)
