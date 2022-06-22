@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
-import { useState } from 'react';
 
 const TASKS = [
   {
@@ -19,9 +18,7 @@ const TASKS = [
 const App = () => {
   const [tasks, setTasks] = useState(TASKS);
 
-  const updateComplete = (id) => {
-    console.log('Inside update task', id);
-
+  const setComplete = (id) => {
     const newTasks = [];
     for (const task of tasks) {
       const newTask = { ...task };
@@ -34,11 +31,9 @@ const App = () => {
   };
 
   const deleteTask = (id) => {
-    console.log('Inside delete task', id);
-    const newTasks = tasks.filter((task) => task.id !== id);
+    const newTasks = tasks.filter((task) => task.id != id);
     setTasks(newTasks);
   };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -46,11 +41,13 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList
-            tasks={tasks}
-            clickCallback={updateComplete}
-            deleteCallback={deleteTask}
-          />
+          {
+            <TaskList
+              tasks={tasks}
+              setCompleteCallback={setComplete}
+              deleteTaskCallback={deleteTask}
+            />
+          }
         </div>
       </main>
     </div>
