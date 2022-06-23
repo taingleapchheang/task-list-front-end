@@ -8,12 +8,12 @@ const Task = ({
   title,
   description,
   // eslint-disable-next-line camelcase
-  is_complete,
+  isComplete,
   setCompleteCallback,
   deleteTaskCallback,
 }) => {
   // eslint-disable-next-line camelcase
-  const buttonClass = is_complete ? 'tasks__item__toggle--completed' : '';
+  const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
 
   return (
     <li className="tasks__item">
@@ -38,7 +38,7 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   // eslint-disable-next-line camelcase
-  is_complete: PropTypes.bool.isRequired,
+  isComplete: PropTypes.bool.isRequired,
   setCompleteCallback: PropTypes.func.isRequired,
   deleteTaskCallback: PropTypes.func.isRequired,
 };

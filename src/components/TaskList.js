@@ -12,7 +12,7 @@ const TaskList = ({ tasks, setCompleteCallback, deleteTaskCallback }) => {
           id={task.id}
           title={task.title}
           description={task.description}
-          is_complete={task.is_complete}
+          isComplete={task.is_complete}
           setCompleteCallback={setCompleteCallback}
           deleteTaskCallback={deleteTaskCallback}
         />
