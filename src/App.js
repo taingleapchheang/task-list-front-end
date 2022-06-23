@@ -41,10 +41,12 @@ const App = () => {
             .then(() => {
               // eslint-disable-next-line camelcase
               console.log('Patch completed');
-              console.log(task.is_complete);
+
               // eslint-disable-next-line camelcase
               task.is_complete = true;
+              setTasks(newTasks);
             })
+
             .catch((error) =>
               console.log(`Cannot update the complete status ${error}`)
             );
@@ -56,17 +58,18 @@ const App = () => {
             .then(() => {
               // eslint-disable-next-line camelcase
               console.log('Patch completed');
-              console.log(task.is_complete);
+
               // eslint-disable-next-line camelcase
               task.is_complete = false;
+              setTasks(newTasks);
             })
             .catch((error) =>
               console.log(`Cannot update the complete status ${error}`)
             );
         }
+        console.log(task.is_complete);
       }
     }
-    setTasks(newTasks);
   };
 
   const deleteTask = (id) => {

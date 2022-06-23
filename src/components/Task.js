@@ -36,7 +36,7 @@ const Task = ({
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  // description: PropTypes.string.isRequired,
   // eslint-disable-next-line camelcase
   is_complete: PropTypes.bool.isRequired,
   setCompleteCallback: PropTypes.func.isRequired,
