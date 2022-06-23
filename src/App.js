@@ -41,7 +41,6 @@ const App = () => {
             .then(() => {
               // eslint-disable-next-line camelcase
               console.log('Patch completed');
-
               // eslint-disable-next-line camelcase
               task.is_complete = true;
               setTasks(newTasks);

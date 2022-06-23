@@ -6,7 +6,7 @@ import './Task.css';
 const Task = ({
   id,
   title,
-  description,
+  // description,
   // eslint-disable-next-line camelcase
   isComplete,
   setCompleteCallback,
