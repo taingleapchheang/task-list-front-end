@@ -1,0 +1,11 @@
+.form_content {
+    width: 50%;
+    margin: auto;
+}
+
+.style {
+    color: darkblue;
+    text-decoration: underline;
+    font: bold;
+    font-size: 18px;
+}
