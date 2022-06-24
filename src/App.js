@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
 import axios from 'axios';
+import TaskForm from '.components/TaskForm.js';
 
 // const TASKS = [
 //   {
@@ -72,6 +73,11 @@ const App = () => {
     }
   };
 
+    const makeNewTask = (data) => {
+      axios
+      .post('https://task-list-api-c17.herokuapp.com/tasks' , data)
+      .then((reponse) => {}) 
+    
   const deleteTask = (id) => {
     axios
       .delete(`https://task-list-api-c17.herokuapp.com/tasks/${id}`)
@@ -90,13 +96,14 @@ const App = () => {
       </header>
       <main>
         <div>
-          {
+          
+            <TaskForm handleSubmission={makeNewTask}/>
             <TaskList
               tasks={tasks}
               setCompleteCallback={setComplete}
               deleteTaskCallback={deleteTask}
             />
-          }
+          
         </div>
       </main>
     </div>
