@@ -18,7 +18,8 @@ const Task = ({
   return (
     <li className="tasks__item">
       <button
-        className={`tasks__item__toggle ${buttonClass}`}
+        // className={`tasks__item__toggle ${buttonClass}`}
+        className={buttonClass}
         onClick={() => setCompleteCallback(id)}
       >
         {title}
@@ -36,7 +37,7 @@ const Task = ({
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  // description: PropTypes.string.isRequired,
   // eslint-disable-next-line camelcase
   isComplete: PropTypes.bool.isRequired,
   setCompleteCallback: PropTypes.func.isRequired,
