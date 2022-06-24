@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
 import axios from 'axios';
-import TaskForm from '.components/TaskForm.js';
+import TaskForm from './components/TaskForm.js';
 
 // const TASKS = [
 //   {
@@ -21,12 +21,7 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('https://task-list-api-c17.herokuapp.com/tasks')
-      .then((response) => {
-        setTasks(response.data);
-      })
-      .catch((error) => console.log(`Cannot get the data ${error}`));
+    getTasksFromAPI();
   }, []);
 
   const setComplete = (id) => {
@@ -72,11 +67,25 @@ const App = () => {
     }
   };
 
-    const makeNewTask = (data) => {
-      axios
-      .post('https://task-list-api-c17.herokuapp.com/tasks' , data)
-      .then((reponse) => {}) 
-    
+  const getTasksFromAPI = () => {
+    axios
+      .get('https://task-list-api-c17.herokuapp.com/tasks')
+      .then((response) => {
+        setTasks(response.data);
+      })
+      .catch((error) => console.log(`Cannot get the data ${error}`));
+  };
+
+  const makeNewTask = (data) => {
+    axios
+      .post('https://task-list-api-c17.herokuapp.com/tasks', data)
+      .then((response) => {
+        getTasksFromAPI();
+      })
+      .catch((error) => {
+        console.log('unable to post new task ${error}');
+      });
+  };
   const deleteTask = (id) => {
     axios
       .delete(`https://task-list-api-c17.herokuapp.com/tasks/${id}`)
@@ -95,14 +104,12 @@ const App = () => {
       </header>
       <main>
         <div>
-          
-            <TaskForm handleSubmission={makeNewTask}/>
-            <TaskList
-              tasks={tasks}
-              setCompleteCallback={setComplete}
-              deleteTaskCallback={deleteTask}
-            />
-          
+          <TaskList
+            tasks={tasks}
+            setCompleteCallback={setComplete}
+            deleteTaskCallback={deleteTask}
+          />
+          <TaskForm handleSubmission={makeNewTask} />
         </div>
       </main>
     </div>

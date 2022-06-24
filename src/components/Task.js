@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import './Task.css';
 
 const Task = ({
   id,
   title,
-  // description,
+  description,
   // eslint-disable-next-line camelcase
   isComplete,
   setCompleteCallback,
@@ -37,7 +36,7 @@ const Task = ({
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  // description: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   // eslint-disable-next-line camelcase
   isComplete: PropTypes.bool.isRequired,
   setCompleteCallback: PropTypes.func.isRequired,
